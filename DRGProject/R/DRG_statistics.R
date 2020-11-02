@@ -7,6 +7,11 @@
 #' @return to show \code{method} over all of the DRG codes for average Medicare payments
 #' @export
 #'
+#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 geom_boxplot
+#' @importFrom dplyr summarize
+#' @importFrom dplyr group_by
+#'
 #' @examples
 #' DRG_stat("mean")
 #'

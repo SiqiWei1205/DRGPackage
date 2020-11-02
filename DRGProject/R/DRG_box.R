@@ -9,6 +9,8 @@
 #'
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 geom_boxplot
+#' @importFrom dplyr summarize
+#' @importFrom dplyr group_by
 #'
 #' @examples
 #'DRG_box("Average.Covered.Charges")
@@ -18,7 +20,7 @@ DRG_box <-
                        "Average.Total.Payments",
                        "Average.Medicare.Payments")) {
     DRG.No <- substring(DRG$DRG.Definition, 1, 3)
-    DRG %>% group_by(DRG.Definition) %>% summarize(DRG.No)
+    DRG %>% dplyr::group_by(DRG.Definition) %>% dplyr::summarize(DRG.No)
     ggplot(DRG, aes(x = factor(DRG.No), y = get(payment))) +
       geom_boxplot(fill = "lightblue") +
       coord_trans(y = "log10") +
@@ -29,7 +31,7 @@ DRG_box <-
       )) +
       xlab("DRG definition number") +
       ylab(payment) +
-      ggtitle(paste("Boxplot of", payment))
+      ggtitle(paste("Boxplot of", gsub("."," ",payment,fixed = TRUE)))
   }
 
 
